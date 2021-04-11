@@ -10,6 +10,7 @@ int Fibonacci(int n)
     if(n == 2)
         return 1;
 
+    // Can comment this line as well
     if(fib[n] != 0)
         return fib[n];
 
@@ -19,6 +20,7 @@ int Fibonacci(int n)
 int main()
 {
     cout<<"Fibonacci : "<<Fibonacci(9);
+    cout<<endl;
 
     return 0;
 }
