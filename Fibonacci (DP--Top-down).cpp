@@ -20,7 +20,6 @@ int Fibonacci(int n)
 int main()
 {
     cout<<"Fibonacci : "<<Fibonacci(9);
-    cout<<endl;
 
     return 0;
 }
