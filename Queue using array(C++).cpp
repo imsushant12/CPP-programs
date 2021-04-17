@@ -1,6 +1,4 @@
 #include<bits/stdc++.h>
-#include<iostream>
-
 using namespace std;
 
 class Queue
@@ -12,20 +10,13 @@ private:
     int *ptr;
 
 public:
-    /*Queue()
-    {
-        front=-1;
-        rear=-1;
-        capacity=10;
-        ptr=new int [capacity];       //important
-    }*/
 
     Queue(int cap)
     {
-        front=-1;
-        rear=-1;
-        capacity=cap;
-        ptr=new int [capacity];          //important
+        front = 0;
+        rear = 0;
+        capacity = cap;
+        ptr = new int [capacity];
     }
 
     bool isEmpty()
@@ -37,37 +28,35 @@ public:
 
     bool isFull()
     {
-        if(rear == capacity-1)
+        if((rear+1) % capacity == front)
             return true;
         return false;
     }
 
     void enQueue()
     {
-        int data;
         if(isFull())
             cout<<"\nQueue is Full"<<endl;
         else
         {
+            int data;
             cout<<"\nEnter data to be inserted : ";
             cin>>data;
-            rear++;
-            ptr[rear]=data;
-            if(front == -1)
-                front++;
+            rear = (rear+1)%capacity;
+            ptr[rear] = data;
         }
     }
 
     void deQueue()
     {
-        int data;
         if(isEmpty())
             cout<<"\nQueue is Empty"<<endl;
         else
         {
-            data=ptr[front];
+            int data;
+            front = (front+1)%capacity;
+            data = ptr[front];
             cout<<endl<<data<<"  is deleted from Queue"<<endl;
-            front++;
         }
     }
 
@@ -78,8 +67,10 @@ public:
             cout<<"\nQueue is Empty"<<endl;
         else
         {
-            for(i = front ; i <= rear ; i++)
-                cout<<"Data = "<<ptr[i]<<endl;
+            cout<<"Queue is : ";
+            for(i = front+1 ; i != rear ; i = (i+1) % capacity)
+                cout<<ptr[i]<<"   ";
+            cout<<ptr[rear]<<endl;
         }
     }
 };
@@ -87,12 +78,9 @@ public:
 int main()
 {
     int cap,choice;
-
     cout<<"Enter the size or capacity of Queue : ";
     cin>>cap;
-
     Queue q(cap);
-
     while(1)
     {
         cout<<endl;
