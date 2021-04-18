@@ -1,6 +1,13 @@
+/*
+Queue is a linear data structure which follows FIFO
+(First In First Out) Rule. It can be implemented using array/
+linked list/ stacks.
+*/
+
 #include<bits/stdc++.h>
 using namespace std;
 
+//We are creating a class for array
 class Queue
 {
 private:
@@ -11,6 +18,7 @@ private:
 
 public:
 
+    //Constructor to initialize the data members of Queue class
     Queue(int cap)
     {
         front = 0;
@@ -19,6 +27,7 @@ public:
         ptr = new int [capacity];
     }
 
+    //Checking if the Queue is empty or not
     bool isEmpty()
     {
         if(front == rear)
@@ -26,6 +35,7 @@ public:
         return false;
     }
 
+    //Checking if the Queue is full or not
     bool isFull()
     {
         if((rear+1) % capacity == front)
@@ -33,6 +43,7 @@ public:
         return false;
     }
 
+    //Inserting data into the queue
     void enQueue()
     {
         if(isFull())
@@ -47,6 +58,7 @@ public:
         }
     }
 
+    //Deleting data from the queue
     void deQueue()
     {
         if(isEmpty())
@@ -60,6 +72,7 @@ public:
         }
     }
 
+    //Traversing queue and printing data
     void display()
     {
         int i;
@@ -75,6 +88,7 @@ public:
     }
 };
 
+//Driver Program
 int main()
 {
     int cap,choice;
@@ -116,3 +130,95 @@ int main()
     }
     return 0;
 }
+
+/*
+    Time Complexities:
+    Enqueue --> O(1)
+    DeQueue --> O(1)
+    IsEmpty --> O(1)
+    IsFull  --> O(1)
+
+    Space Complexity: O(n) [for array]
+    ----------------------------------
+    Sample Input - Output :
+
+    Enter the size or capacity of Queue : 5
+
+    1. To enter data into queue.
+    2. To delete data from queue.
+    3. To display the data.
+    4. TO EXIT.
+
+    ENTER YOUR CHOICE... : 1
+
+    Enter data to be inserted : 10
+
+    1. To enter data into queue.
+    2. To delete data from queue.
+    3. To display the data.
+    4. TO EXIT.
+
+    ENTER YOUR CHOICE... : 1
+
+    Enter data to be inserted : 20
+
+    1. To enter data into queue.
+    2. To delete data from queue.
+    3. To display the data.
+    4. TO EXIT.
+
+    ENTER YOUR CHOICE... : 1
+
+    Enter data to be inserted : 30
+
+    1. To enter data into queue.
+    2. To delete data from queue.
+    3. To display the data.
+    4. TO EXIT.
+
+    ENTER YOUR CHOICE... : 1
+
+    Enter data to be inserted : 40
+
+    1. To enter data into queue.
+    2. To delete data from queue.
+    3. To display the data.
+    4. TO EXIT.
+
+    ENTER YOUR CHOICE... : 3
+    Queue is : 10   20   30   40
+
+    1. To enter data into queue.
+    2. To delete data from queue.
+    3. To display the data.
+    4. TO EXIT.
+
+    ENTER YOUR CHOICE... : 2
+
+    10  is deleted from Queue
+
+    1. To enter data into queue.
+    2. To delete data from queue.
+    3. To display the data.
+    4. TO EXIT.
+
+    ENTER YOUR CHOICE... : 1
+
+    Enter data to be inserted : 50
+
+    1. To enter data into queue.
+    2. To delete data from queue.
+    3. To display the data.
+    4. TO EXIT.
+
+    ENTER YOUR CHOICE... : 3
+    Queue is : 20   30   40   50
+
+    1. To enter data into queue.
+    2. To delete data from queue.
+    3. To display the data.
+    4. TO EXIT.
+
+    ENTER YOUR CHOICE... : 4
+
+*/
