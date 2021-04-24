@@ -25,7 +25,6 @@ int main()
 {
     int a[] = {4,3,7,8,6,2,1};
     int n = sizeof(a)/sizeof(a[0]);
-    sort(a , a+n);
 
     cout<<"Original array is : ";
     for(int i=0 ; i<n ; i++)
@@ -38,13 +37,13 @@ int main()
 
 /*
 	Time Complexity : O(n)
-	
+
     Sample Input-Output :
     ---------------------
     Input --> 4,3,7,8,6,2,1
     Output: Original array  : 4  3  7  8  6  2  1
             Zig - Zag array : 4  7  3  6  8  1  2
-    
+
     NOTE : If we want a sorted data we can first sort the array
     using sort() and then call the zigzag() function.
 */
