@@ -4,7 +4,6 @@ using namespace std;
 void findChanges(int changes[] , int sum , int n)
 {
     sort(changes , changes+n);
-
     for(int i=n-1 ; i>=0 ; i--)
     {
         while(sum >= changes[i])
@@ -21,7 +20,7 @@ int main()
     cout<<"Enter the sum : ";
     cin>>sum;
 
-    int changes [] = {1 , 2 , 5 , 10 , 20 , 50 , 100};
+    int changes[] = {1 , 2 , 5 , 10 , 20 , 50 , 100};
 
     int n = sizeof(changes) / sizeof(changes[0]);
 
