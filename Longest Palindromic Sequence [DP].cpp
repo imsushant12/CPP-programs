@@ -9,7 +9,6 @@ Space Complexity : O(n*n)
 int LPS(string s)
 {
     int n = s.size();
-
     int dp[n][n] = {0};
 
     for(int gap=0 ; gap<s.length() ; gap++)
