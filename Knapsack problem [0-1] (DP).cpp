@@ -1,8 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-//Time Complexity : O(N*W).
-//Space Complexity: O(N*W).
+/*
+Time Complexity : O(n*w).
+Space Complexity: O(n*w).
+*/
+
 int KS_01(int W[] , int P[] , int wt , int n)
 {
     int dp[n+1][wt+1];

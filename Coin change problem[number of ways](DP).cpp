@@ -1,6 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+/*
+Time Complexity : O(n^2)
+Space Complexity : O(n)
+*/
+
 void findChanges(int changes[] , int sum , int n)
 {
     int dp[sum+1] = {0};

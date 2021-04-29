@@ -1,8 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-//Time Complexity : O((W+1)*N)
-//Space Complexity: O(W+1).
+/*
+Time Complexity : O((W+1)*N)
+Space Complexity: O(W+1).
+*/
+
 int UKS(int W[], int P[], int wt, int n)
 {
     //initializing the array with 0.

@@ -2,6 +2,7 @@
 using namespace std;
 
 //Time Complexity: O(n*w), n is number of coins and w is sum to be paid
+//Space Complexity : O(n*sum)
 int findChanges(int changes[] , int sum , int n)
 {
     int dp[n+1][sum+1] = {0};
