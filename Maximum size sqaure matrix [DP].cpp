@@ -55,6 +55,8 @@ int maximumMatrix(int a[][6])
         }
     }
 
+    /*
+    Visualizing the DP array
     for(int i=0 ; i<M ; i++)
     {
         for(int j=0 ; j<N ; j++)
@@ -63,6 +65,7 @@ int maximumMatrix(int a[][6])
         }
         cout<<endl;
     }
+    */
     return maxlen;
 }
 
