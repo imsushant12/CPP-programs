@@ -4,6 +4,11 @@ using namespace std;
 #define Z 99999
 #define N 4
 
+/*
+Time Complexity  : O(n^3)
+Space Complexity : O(n*n)
+*/
+
 void printMatrix(int dp[][N])
 {
     for(int i=0 ; i<N ; i++)
