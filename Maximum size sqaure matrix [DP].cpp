@@ -1,54 +1,74 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#define N 6
+#define M 5
+
 /*
 Time Complexity  : O(m*n)
 Space Complexity : O(m*n)
 */
 
-int optimalGame(int a[] , int n)
+int maximumMatrix(int a[][6])
 {
-    int dp[n][n];
+    int dp[M][N];
 
-    for(int gap=0 ; gap<n ; gap++)
+    int maxlen = 0;
+
+    for(int i=M-1 ; i>=0 ; i--)
     {
-        for(int i=0, j=gap ; j<n ; i++, j++)
+        for(int j=N-1 ; j>=0 ; j--)
         {
-            //we have only one option to choose
-            if(gap == 0)
-                dp[i][j] = a[i];
+            //for the last cell i.e. column is (n-1) and row is (m-1)
+            if(i == M-1 && j == N-1)
+                dp[i][j] = a[i][j];
 
-            //will choose maximum of the a[i] and a[j]
-            else if(gap == 1)
-            {
-                dp[i][j] = max(a[i] , a[j]);
-            }
-            //for the cases in which number of nodes is greater than 3
+            //for the last row
+            else if(i == M-1)
+                dp[i][j] = a[i][j];
+
+            //for the last column
+            else if(j == N-1)
+                dp[i][j] = a[i][j];
+
+            //for the rest of the cell, compare the diagonal, below and right cell
+            //to find the minimum of them and 1 to the result.
             else
             {
-                int val1 = a[i] + min(dp[i+2][j] , dp[i+1][j-1]);
-                //choice is : i ---->  i+1 , j
-                //------------------------------
-                //either i+1 -->  i+2 , j
-                //or     j   -->  i+1 , j-1
-                int val2 = a[j] + min(dp[i+1][j-1] , dp[i][j-2]);
-                //choice is : j ---->  i , j-1
-                //-------------------------------
-                //either i   -->  i+1 , j-1
-                //or     j-1 -->  i   , j-2
+                if(a[i][j] == 0)
+                    dp[i][j] = 0;
+                else
+                {
+                    int right = dp[i+1][j];
+                    int diagonal = dp[i+1][j+1];
+                    int below = dp[i][j+1];
 
-                dp[i][j] = max(val1 , val2);
+                    int result = min(diagonal , min(right , below));
+
+                    dp[i][j] = result+1;
+
+                    //finding the maximum length of the square
+                    if(dp[i][j] > maxlen)
+                        maxlen = dp[i][j];
+                }
             }
         }
     }
-    return dp[0][n-1];
+
+    for(int i=0 ; i<M ; i++)
+    {
+        for(int j=0 ; j<N ; j++)
+        {
+            cout<<dp[i][j]<<"    ";
+        }
+        cout<<endl;
+    }
+    return maxlen;
 }
 
 int main()
 {
-    int n,m;
-
-    int matrix[n][m] =
+    int matrix[M][N] =
     {
         { 0 , 1 , 0 , 1 , 0 , 1 },
         { 1 , 0 , 1 , 0 , 1 , 0 },
@@ -57,7 +77,7 @@ int main()
         { 1 , 1 , 1 , 1 , 1 , 1 }
     };
 
-    cout<<"Maximum possible size possible is : "<<optimalGame(a , n)<<endl;
+    cout<<"Maximum possible size possible is : "<<maximumMatrix(matrix);
     return 0;
 }
 
