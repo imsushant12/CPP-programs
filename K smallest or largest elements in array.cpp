@@ -3,8 +3,8 @@ using namespace std;
 
 int findPivot(int a[] , int start , int end)
 {
-    int pivot = a[end];                 //selecting the pivot element
-    int pIndex = start;                 //initially partition-index will be at starting
+    int pivot = a[end];                 //selecting the pivot element.
+    int pIndex = start;                 //initially partition-index will be at starting.
 
     for(int i=start ; i<end ; i++)
     {
@@ -15,7 +15,7 @@ int findPivot(int a[] , int start , int end)
             pIndex++;                   //incrementing pIndex for further swapping.
         }
     }
-    swap(a[pIndex] , a[end]);           //lastly swapping or the correct position of pivot
+    swap(a[pIndex] , a[end]);           //lastly swapping or the correct position of pivot.
     return pIndex;
 }
 
@@ -56,6 +56,7 @@ int main()
 
     int low = 0;
     int high = n-1;
+
     //lets assume k is 3
     int k = 3;
 
