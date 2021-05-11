@@ -19,7 +19,7 @@ struct node* newNode(int data)
 
 void preorder(struct node* root)
 {
-      stack <node*> s;
+	stack <node*> s;
       struct node *temp = root;
 
       while(temp!= NULL || !s.empty())
