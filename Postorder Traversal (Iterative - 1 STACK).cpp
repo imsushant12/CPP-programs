@@ -96,6 +96,19 @@ void postorder(struct Node* root)
     while (!isEmpty(stack));
 }
 
+/*
+// Recursive Way:
+void postorder(struct node* root)
+{
+    if(root == NULL)
+        return;
+
+    postorder(root->left);
+    postorder(root->right);
+    cout<<root->data<<"  ";
+}
+*/
+
 int main()
 {
     struct Node* root = NULL;
