@@ -19,6 +19,9 @@ struct node* newNode(int data)
 
 void postorder(struct node* root)
 {
+    if(root == NULL)
+        return;
+
     stack <node*> s1,s2;
     struct node *temp;
 
@@ -28,7 +31,7 @@ void postorder(struct node* root)
         temp = s1.top();
         s1.pop();
         s2.push(temp);
-        if(temp->left);
+        if(temp->left)
             s1.push(temp->left);
         if(temp->right)
             s1.push(temp->right);
