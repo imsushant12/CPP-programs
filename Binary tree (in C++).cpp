@@ -1,11 +1,6 @@
 //by Sushant Gaurav
 
 #include <bits/stdc++.h>
-#include <iostream>
-#include <stack>
-#include <queue>
-#include <vector>
-#include <map>
 using namespace std;
 
 map <int , int> HashMap;                                //declaration of Hash-map used in the program
