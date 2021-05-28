@@ -4,43 +4,85 @@ using namespace std;
 struct Node
 {
     int data;
-    struct Node* next;
+    Node* prev;
+    Node* next;
 };
 
-Node* newNode(int key)
+void push(struct Node** head , int new_data)
 {
-    Node* temp = new Node;
-    temp->data = key;
-    temp->next = NULL;
-    return temp;
+    Node* new_node = new Node;
+
+    new_node->data = new_data;
+    new_node->prev = NULL;
+    new_node->next = (*head);
+
+    if((*head) != NULL)
+        (*head)->prev = new_node;
+
+    *head = new_node;
 }
 
-void printList(Node* head)
+void printList(struct Node* node)
 {
-    while (head != NULL)
+    while(node->next != NULL)
     {
-        cout<<head->data<<"  ";
-        head = head->next;
+        cout<<node->data<<"  "<<"<-->"<<"  ";
+        node = node->next;
     }
-    cout<<endl;
+    cout<<node->data;
 }
 
-Node* rotateDLL(Node* head)
+void rotateDLL(struct Node** head , int n)
 {
+    if(n == 0)
+        return;
 
+    Node* current = *head;
+
+    int counter = 1;
+    while(counter < n && current != NULL)
+    {
+        current = current->next;
+        counter++;
+    }
+    // current will now point to one node before the new head
+    if(current == NULL)
+        return;
+
+    Node* lastNode = current;
+
+
+    while(current->next != NULL)
+        current = current->next;
+
+    current->next = *head;
+
+    (*head)->prev = current;
+    (*head) = lastNode->next;
+    (*head)->prev = NULL;
+
+    lastNode->next = NULL;
 }
 
-int main()
+int main(void)
 {
-    Node* head = newNode(50);
-    head->next = newNode(20);
-    head->next->next = newNode(15);
-    head->next->next->next = newNode(4);
-    head->next->next->next->next = newNode(10);
+    Node* head = NULL;
 
-    Node* answer = rotateDLL(head);
+    push(&head , 10);
+    push(&head , 20);
+    push(&head , 30);
+    push(&head , 40);
+    push(&head , 50);
+
+    int n = 4;
+
+    cout<<"Linked list before rotation : ";
+    printList(head);
+
+    rotateDLL(&head , n);
+
+    cout<<"\n\nLinked list after rotation : ";
+    printList(head);
 
     return 0;
 }
-
-
