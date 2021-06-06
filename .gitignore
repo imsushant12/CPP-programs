@@ -3,3 +3,4 @@ test.cpp
 test4.cpp
 *.o
 *.exe
+.vscode
