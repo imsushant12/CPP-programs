@@ -1,17 +1,19 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 class Base
 {
     int x;
-    public:
+
+public:
     virtual void fun() = 0;
-    int getX(){return x;}
+    int getX() { return x; }
 };
-class Derived:public Base
+class Derived : public Base
 {
     int y;
-    public:
-    void fun(){cout<<"I am Sushant Gaurav of A13";}
+
+public:
+    void fun() { cout << "I am Sushant Gaurav of A13"; }
 };
 int main(void)
 {
