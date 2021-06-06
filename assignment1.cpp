@@ -6,14 +6,20 @@ class Base
 
 public:
     virtual void fun() = 0;
-    int getX() { return x; }
+    int getX()
+    {
+        return x;
+    }
 };
 class Derived : public Base
 {
     int y;
 
 public:
-    void fun() { cout << "I am Sushant Gaurav of A13"; }
+    void fun()
+    {
+        cout << "I am Sushant Gaurav of section-A13";
+    }
 };
 int main(void)
 {
