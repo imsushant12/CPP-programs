@@ -1,161 +1,161 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
 class Node
 {
 public:
     int data;
-    struct Node *link;
-};
-Node *rear;
+    Node *rear;
+    Node *next;
 
-//This function will check if the Queue is empty or not.
-int isEmpty()
-{
-    if(rear == NULL)
-        return 1;
-    else
-        return 0;
-}
-
-//This function will insert elements into the Queue.
-void insertQueue(int item)
-{
-    Node *temp = new Node;
-    temp->data = item;
-
-    if(temp == NULL)
+    Node()
     {
-        cout<<"Memory problem."<<endl;
-        return;
-    }
-
-    if(isEmpty()) //If queue is empty.
-    {
-        rear = temp;
-        temp->link = rear;
-    }
-    else
-    {
-        temp->link = rear->link;
-        rear->link = temp;
-        rear = temp;
-    }
-}
-
-//This function will delete the front element of Queue.
-int deleteElement()
-{
-    int item;
-    Node *temp;
-
-    if(isEmpty())
-    {
-        cout<<"Queue underflow"<<endl;
-        return -1;
-    }
-
-    if(rear->link == rear)  //If only one element is present
-    {
-        temp = rear;
         rear = NULL;
     }
 
-    else
+    //This function will check if the Queue is empty or not.
+    bool isEmpty()
     {
-        temp = rear->link;
-        rear->link = rear->link->link;
+        if (rear == NULL)
+            return true;
+        else
+            return false;
     }
 
-    item = temp->data;
-    delete temp;
-    return item;
-}
-
-//This function will return the front element
-int peek()
-{
-    if(isEmpty())
+    //This function will insert elements into the Queue.
+    void insertQueue(int item)
     {
-        cout<<"Queue underflow"<<endl;
-        return -1;
+        Node *temp = new Node;
+        temp->data = item;
+
+        if (isEmpty()) //If queue is empty.
+        {
+            rear = temp;
+            temp->next = rear;
+        }
+        else
+        {
+            temp->next = rear->next;
+            rear->next = temp;
+            rear = temp;
+        }
     }
 
-    return rear->link->data;
-}
-
-//This function will display elements of Queue
-void display()
-{
-    Node *temp;
-    if(isEmpty())
+    //This function will return the front element
+    int peek()
     {
-        cout<<"Queue is empty"<<endl;
-        return;
+        if (isEmpty())
+        {
+            cout << "Queue underflow" << endl;
+            return -1;
+        }
+
+        return rear->next->data;
     }
 
-    cout<<"Queue formed : ";
-
-    temp = rear->link;
-    do
+    //This function will delete the front element of Queue.
+    int deleteElement()
     {
-        cout<<temp->data<<"  ";
-        temp = temp->link;
+        int item;
+        Node *temp;
 
-    }while(temp != rear->link);
+        if (isEmpty())
+            return -1;
 
-}
+        else if (rear->next == rear) //If only one element is present
+        {
+            temp = rear;
+            rear = NULL;
+        }
 
+        else
+        {
+            temp = rear->next;
+            rear->next = rear->next->next;
+        }
+
+        item = temp->data;
+        delete temp;
+        return item;
+    }
+    //This function will display elements of Queue
+    void display()
+    {
+        Node *temp;
+        if (isEmpty())
+        {
+            cout << "Queue is empty" << endl;
+            return;
+        }
+
+        cout << "Queue formed : ";
+
+        temp = rear->next;
+        do
+        {
+            cout << temp->data << "  ";
+            temp = temp->next;
+
+        } while (temp != rear->next);
+    }
+};
 
 int main()
 {
-    int choice,item;
-    while(1)
+    Node q;
+    int choice, item;
+    while (1)
     {
-        cout<<endl;
-        cout<<"1. INSERT"<<endl;
-        cout<<"2. DELETE"<<endl;
-        cout<<"3. PEEK"<<endl;
-        cout<<"4. DISPLAY"<<endl;
-        cout<<"5. EXIT"<<endl;
-        cout<<"Enter your choice : ";
-        cin>>choice;
+        cout << endl;
+        cout << "1. INSERT" << endl;
+        cout << "2. DELETE" << endl;
+        cout << "3. PEEK" << endl;
+        cout << "4. DISPLAY" << endl;
+        cout << "5. EXIT" << endl;
+        cout << "Enter your choice : ";
+        cin >> choice;
 
-        switch(choice)
+        switch (choice)
         {
         case 1:
-            cout<<"Enter the element for insertion : ";
-            cin>>item;
-            insertQueue(item);
+        {
+            cout << "Enter the element to be inserted : ";
+            cin >> item;
+            q.insertQueue(item);
 
             break;
+        }
 
         case 2:
-            if(deleteElement() == -1)
-                cout<<endl;
+        {
+            int answer = q.deleteElement();
+            if (answer == -1)
+                cout << "\nQueue is empty.";
             else
-                cout<<"Deleted element : "<<deleteElement();
+                cout << "\nDeleted element : " << answer;
 
             break;
+        }
 
         case 3:
-            if(peek() == -1)
-                cout<<"Not found"<<endl;
+        {
+            if (q.peek() == -1)
+                cout << "\nQueue is empty." << endl;
             else
-                cout<<"Item at the front of queue is : "<<peek();
+                cout << "\nItem at the front of queue is : " << q.peek();
 
             break;
+        }
 
         case 4:
-            display();
+            q.display();
             break;
 
         case 5:
             exit(0);
 
         default:
-            cout<<"IVALID CHOICE!";
+            cout << "IVALID CHOICE!";
         }
     }
 }
@@ -254,5 +254,3 @@ int main()
     5. EXIT
     Enter your choice : 5
 */
-
-
