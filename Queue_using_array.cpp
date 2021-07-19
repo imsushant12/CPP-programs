@@ -1,10 +1,9 @@
 /*
-Queue is a linear data structure which follows FIFO
-(First In First Out) Rule. It can be implemented using array/
-linked list/ stacks.
+Queue is a linear data structure which follows FIFO (First In First Out) Rule. 
+It can be implemented using array or linked list or stacks.
 */
 
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 //We are creating a class for array
@@ -17,28 +16,32 @@ private:
     int *ptr;
 
 public:
-
     //Constructor to initialize the data members of Queue class
-    Queue(int cap)
+    Queue(int capacity)
     {
-        front = 0;
-        rear = 0;
-        capacity = cap;
-        ptr = new int [capacity];
+        front = -1;
+        rear = -1;
+        this->capacity = capacity;
+        ptr = new int[capacity];
     }
 
     //Checking if the Queue is empty or not
     bool isEmpty()
     {
-        if(front == rear)
-            return true;
+        if (front == rear)
+        {
+            if (rear == capacity - 1)
+                return false;
+            else
+                return true;
+        }
         return false;
     }
 
     //Checking if the Queue is full or not
     bool isFull()
     {
-        if((rear+1) % capacity == front)
+        if ((rear + 1) % capacity == front)
             return true;
         return false;
     }
@@ -46,29 +49,42 @@ public:
     //Inserting data into the queue
     void enQueue()
     {
-        if(isFull())
-            cout<<"\nQueue is Full"<<endl;
+        if (isFull())
+            cout << "\nQueue is Full" << endl;
         else
         {
             int data;
-            cout<<"\nEnter data to be inserted : ";
-            cin>>data;
-            rear = (rear+1)%capacity;
-            ptr[rear] = data;
+            cout << "\nEnter data to be inserted : ";
+            cin >> data;
+            if (rear == -1)
+            {
+                ptr[0] = data;
+                rear = front = 0;
+                cout << data << " is inserted at rear = " << rear << " and front = " << front;
+            }
+            else
+            {
+                rear = (rear + 1) % capacity;
+                ptr[rear] = data;
+                cout << data << " is inserted at rear = " << rear << " and front = " << front;
+            }
         }
     }
 
     //Deleting data from the queue
     void deQueue()
     {
-        if(isEmpty())
-            cout<<"\nQueue is Empty"<<endl;
+        if (isEmpty())
+            cout << "\nQueue is Empty" << endl;
         else
         {
-            int data;
-            front = (front+1)%capacity;
-            data = ptr[front];
-            cout<<endl<<data<<"  is deleted from Queue"<<endl;
+            cout << endl
+                 << ptr[front] << "  is deleted from Queue" << endl;
+            cout << "front is : " << front;
+            if (front == capacity - 1)
+                front = rear = -1;
+            else
+                front = (front + 1) % capacity;
         }
     }
 
@@ -76,14 +92,14 @@ public:
     void display()
     {
         int i;
-        if(rear == front)
-            cout<<"\nQueue is Empty"<<endl;
+        if (isEmpty())
+            cout << "\nQueue is Empty" << endl;
         else
         {
-            cout<<"Queue is : ";
-            for(i = front+1 ; i != rear ; i = (i+1) % capacity)
-                cout<<ptr[i]<<"   ";
-            cout<<ptr[rear]<<endl;
+            cout << "Queue is : ";
+            for (i = front; i != rear; i = (i + 1) % capacity)
+                cout << ptr[i] << "   ";
+            cout << ptr[rear] << endl;
         }
     }
 };
@@ -91,22 +107,22 @@ public:
 //Driver Program
 int main()
 {
-    int cap,choice;
-    cout<<"Enter the size or capacity of Queue : ";
-    cin>>cap;
+    int cap, choice;
+    cout << "Enter the size or capacity of Queue : ";
+    cin >> cap;
     Queue q(cap);
-    while(1)
+    while (1)
     {
-        cout<<endl;
-        cout<<"1. To enter data into queue."<<endl;
-        cout<<"2. To delete data from queue."<<endl;
-        cout<<"3. To display the data."<<endl;
-        cout<<"4. TO EXIT."<<endl;
+        cout << endl;
+        cout << "1. To enter data into queue." << endl;
+        cout << "2. To delete data from queue." << endl;
+        cout << "3. To display the data." << endl;
+        cout << "4. TO EXIT." << endl;
 
-        cout<<"\nENTER YOUR CHOICE... : ";
-        cin>>choice;
+        cout << "\nENTER YOUR CHOICE... : ";
+        cin >> choice;
 
-        switch(choice)
+        switch (choice)
         {
         case 1:
             q.enQueue();
@@ -125,7 +141,7 @@ int main()
             break;
 
         default:
-            cout<<"\nINVALID CHOICE..."<<endl;
+            cout << "\nINVALID CHOICE..." << endl;
         }
     }
     return 0;
