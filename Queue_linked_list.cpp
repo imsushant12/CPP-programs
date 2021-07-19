@@ -1,20 +1,18 @@
-#include<bits/stdc++.h>
-#include<iostream>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 class node
 {
 public:
     int info;
-    node* next;
+    node *next;
 };
 
 class Queue
 {
 private:
-    node* rear;
-    node* front;
+    node *rear;
+    node *front;
 
 public:
     Queue()
@@ -25,60 +23,64 @@ public:
 
     bool isEmpty()
     {
-        if(front == NULL)
+        if (front == NULL)
             return true;
         return false;
     }
 
+    // Queue cannot be full if it is implemented using linked list.
+
     void enQueue()
     {
-        node* temp = new node;         //temp is an object of class node
+        node *temp = new node; //temp is an object of class node
         //temp = new node;
         int data;
 
-        cout<<"\nEnter data to be inserted : ";
-        cin>>data;
+        cout << "\nEnter data to be inserted : ";
+        cin >> data;
 
-        temp->info=data;
-        temp->next=NULL;
+        temp->info = data;
+        temp->next = NULL;
 
-        if(front == NULL)
+        if (front == NULL)
         {
-            front=temp;
-            rear=temp;
+            front = temp;
+            rear = temp;
         }
 
         else
         {
-            rear->next=temp;
-            rear=temp;
+            rear->next = temp;
+            rear = temp;
         }
     }
 
     void deQueue()
     {
         int data;
-        node* temp;
+        node *temp;
 
         temp = front;
-        data=front->info;       //temp->info
+        data = front->info; //temp->info
 
         front = front->next;
 
         delete temp;
 
-        cout<<endl<<data<<" has been deleted."<<endl;
+        cout << endl
+             << data << " has been deleted." << endl;
     }
 
     void display()
     {
-        node* temp;
+        node *temp;
         temp = front;
 
-        while(temp != NULL)
+        while (temp != NULL)
         {
-            cout<<endl<<"Data = "<<temp->info;
-            temp=temp->next;
+            cout << endl
+                 << "Data = " << temp->info;
+            temp = temp->next;
         }
     }
 };
@@ -89,18 +91,18 @@ int main()
 
     Queue queue;
 
-    while(1)
+    while (1)
     {
-        cout<<endl;
-        cout<<"1. To enter data into queue."<<endl;
-        cout<<"2. To delete data from queue."<<endl;
-        cout<<"3. To display the data."<<endl;
-        cout<<"4. TO EXIT."<<endl;
+        cout << endl;
+        cout << "1. To enter data into queue." << endl;
+        cout << "2. To delete data from queue." << endl;
+        cout << "3. To display the data." << endl;
+        cout << "4. TO EXIT." << endl;
 
-        cout<<"\nENTER YOUR CHOICE... : ";
-        cin>>choice;
+        cout << "\nENTER YOUR CHOICE... : ";
+        cin >> choice;
 
-        switch(choice)
+        switch (choice)
         {
         case 1:
             queue.enQueue();
@@ -119,7 +121,7 @@ int main()
             break;
 
         default:
-            cout<<"\nINVALID CHOICE..."<<endl;
+            cout << "\nINVALID CHOICE..." << endl;
         }
     }
     return 0;
