@@ -1,6 +1,4 @@
-#include<bits/stdc++.h>
-#include<iostream>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 class Queue
@@ -9,94 +7,98 @@ private:
     int front;
     int rear;
     int capacity;
-    int *ptr;
+    int *queue;
 
 public:
     Queue(int cap)
     {
-        front=0;
-        rear=0;
-        capacity=cap;
-        ptr=new int [capacity];
+        front = rear = -1;
+        capacity = cap;
+        queue = new int[capacity];
     }
 
     bool isEmpty()
     {
-        if(rear == front)
+        if (rear == front)
             return true;
         return false;
     }
 
     bool isFull()
     {
-        if((rear+1) % capacity == front)
+        if ((rear + 1) % capacity == front)
             return true;
         return false;
     }
 
     void enQueue()
     {
-        if(isFull())
-            cout<<"\nQueue is full."<<endl;
+        if (isFull())
+            cout << "\nQueue is full." << endl;
         else
         {
             int data;
-            cout<<"\nEnter data to be inserted : ";
-            cin>>data;
-            rear=(rear+1)%capacity;
-            ptr[rear]=data;
+            cout << "\nEnter data to be inserted : ";
+            cin >> data;
+
+            if (rear == -1 and front == -1)
+                front = 0;
+
+            rear = (rear + 1) % capacity;
+            queue[rear] = data;
         }
     }
 
     void deQueue()
     {
-        if(isEmpty())
-            cout<<"\nQueue is empty."<<endl;
+        if (isEmpty())
+            cout << "\nQueue is empty." << endl;
         else
         {
-            int data;
-            front=(front+1)%capacity;
-            data=ptr[front];
-            cout<<endl<<data<<" is deleted from queue"<<endl;
+            int data = queue[front];
+            front = (front + 1) % capacity;
+            cout << endl
+                 << data << " is deleted from queue." << endl;
         }
     }
 
     void display()
     {
         int i;
-        if(isEmpty())
-            cout<<"\nQueue is empty."<<endl;
+        if (isEmpty())
+            cout << "\nQueue is empty." << endl;
         else
         {
-            cout<<"\nElements in Circular Queue are: "<<endl;
+            cout << "\nElements in Circular Queue are: " << endl;
 
-            for(i = front+1 ; i != rear ; i = (i + 1) % capacity)
-                cout<<ptr[i]<<endl;
+            for (i = front; i != rear; i = (i + 1) % capacity)
+                cout << queue[i] << endl;
+            cout << queue[rear] << endl;
         }
     }
 };
 
 int main()
 {
-    int choice,cap;
+    int choice, cap;
 
-    cout<<"Enter capacity of the queue : ";
-    cin>>cap;
+    cout << "Enter capacity of the queue : ";
+    cin >> cap;
 
     Queue queue(cap);
 
-    while(1)
+    while (1)
     {
-        cout<<endl;
-        cout<<"1. To enter data into queue."<<endl;
-        cout<<"2. To delete data from queue."<<endl;
-        cout<<"3. To display the data."<<endl;
-        cout<<"4. TO EXIT."<<endl;
+        cout << endl;
+        cout << "1. To enter data into queue." << endl;
+        cout << "2. To delete data from queue." << endl;
+        cout << "3. To display the data." << endl;
+        cout << "4. TO EXIT." << endl;
 
-        cout<<"\nENTER YOUR CHOICE... : ";
-        cin>>choice;
+        cout << "\nENTER YOUR CHOICE... : ";
+        cin >> choice;
 
-        switch(choice)
+        switch (choice)
         {
         case 1:
             queue.enQueue();
@@ -115,7 +117,7 @@ int main()
             break;
 
         default:
-            cout<<"\nINVALID CHOICE..."<<endl;
+            cout << "\nINVALID CHOICE..." << endl;
         }
     }
     return 0;
