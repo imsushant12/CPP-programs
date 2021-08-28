@@ -1,62 +1,61 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 #define INF 9999999
 #define V 5
 
-int G[V][V] =
+int graph[V][V] = {{0, 2, 0, 6, 0},
+                   {2, 0, 3, 8, 5},
+                   {0, 3, 0, 0, 7},
+                   {6, 8, 0, 0, 9},
+                   {0, 5, 7, 9, 0}};
+
+int minimumVertex(vector<int> &distance, vector<int> &visited)
 {
-    {0, 9, 75, 0, 0},
-    {9, 0, 95, 19, 42},
-    {75, 95, 0, 51, 66},
-    {0, 19, 51, 0, 31},
-    {0, 42, 66, 31, 0}
-};
+    int minEdge = INF;
+    int result = -1;
+    for (int i = 0; i < V; i++)
+    {
+        if (distance[i] < minEdge and visited[i] == 0)
+        {
+            minEdge = distance[i];
+            result = i;
+        }
+    }
+
+    return result;
+}
+
+void PrimsAlgorithm(vector<int> &distance, vector<int> &parent, vector<int> &visited, int source)
+{
+    distance[source] = 0;
+
+    for (int i = 0; i < V; i++)
+    {
+        int minVertex = minimumVertex(distance, visited);
+        visited[minVertex] = 1;
+
+        for (int j = 0; j < V; j++)
+        {
+            if ((graph[minVertex][j] < distance[j]) and (!visited[j]) and (graph[minVertex][j] != 0))
+            {
+                distance[j] = graph[minVertex][j];
+                parent[j] = minVertex;
+            }
+        }
+    }
+
+    for (int i = 0; i < V; i++)
+        cout << "Parent of " << i << " is : " << parent[i] << " and Distance : " << distance[i] << endl;
+}
 
 int main()
 {
-    int no_edge;
-    int selected[V];
+    vector<int> distance(V, INF);
+    vector<int> parent(V, -1);
+    vector<int> visited(V, 0);
 
-    memset(selected, false, sizeof(selected));
+    PrimsAlgorithm(distance, parent, visited, 0);
 
-    no_edge = 0;
-
-    selected[0] = true;
-
-    int x;
-    int y;
-
-    cout<<"Edge"<<": "<<"Weight"<<endl;
-
-    while(no_edge < V - 1)
-    {
-        int min = INF;
-        x = 0;
-        y = 0;
-
-        for (int i = 0; i < V; i++)
-        {
-            if (selected[i])
-            {
-                for (int j = 0; j < V; j++)
-                {
-                    if (!selected[j] && G[i][j])
-                    {
-                        if (min > G[i][j])
-                        {
-                            min = G[i][j];
-                            x = i;
-                            y = j;
-                        }
-                    }
-                }
-            }
-        }
-        cout << x << " - " << y << " :  " << G[x][y];
-        cout << endl;
-        selected[y] = true;
-        no_edge++;
-    }
     return 0;
 }
