@@ -26,6 +26,30 @@ void DFS_recursive(int source, int V, vector<int> &visited)
     }
 }
 
+void DFS_iterative(int source, int V, vector<int> &visited)
+{
+    stack<int> s;
+    s.push(source);
+    visited[source] = 1;
+
+    while (!s.empty())
+    {
+        int top = s.top();
+        s.pop();
+
+        cout << top << "  ";
+
+        for (int i = 0; i < V; i++)
+        {
+            if (a[top][i] != 0 && visited[i] == 0)
+            {
+                s.push(i);
+                visited[i] = 1;
+            }
+        }
+    }
+}
+
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 void BFS(int source, int V, vector<int> &visited)
@@ -98,8 +122,8 @@ void BellmanFord(int s, int V)
     int *distance = new int[V];
 
     for (int i = 1; i <= V; i++)
-        distance[i] = INT_MAX;                  //initially all the vertex are at infinite distance.
-    distance[s] = 0;                            //distance of source is 0.
+        distance[i] = INT_MAX; //initially all the vertex are at infinite distance.
+    distance[s] = 0;           //distance of source is 0.
 
     for (int i = 0; i < V - 1; i++)
     {
@@ -302,7 +326,7 @@ int main()
         {
             vector<int> visited(V, 0);
             cout << "Graph Traversal is [DFS] : ";
-            DFS_recursive(1, V, visited);
+            DFS_iterative(1, V, visited);
             break;
         }
 
