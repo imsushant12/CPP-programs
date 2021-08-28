@@ -11,30 +11,22 @@ void createGraph(int i, int j, int weight)
 
 int minimumEdge(vector<int> &visited, vector<int> &distance, int v)
 {
-    // int minVertex = -1; //initially we are assuming that first index in minimum index
-    // for (int i = 1; i <= v; i++)
-    // {
-    //     if ((!visited[i]) && (minVertex == -1 || distance[minVertex] > distance[i]))
-    //         minVertex = i;
-    // }
-    // return minVertex;
     int minEdge = INT_MAX;
     int result = -1;
+
     for (int i = 0; i < v; i++)
-    {
         if (distance[i] < minEdge and visited[i] == 0)
         {
             minEdge = distance[i];
             result = i;
         }
-    }
 
     return result;
 }
 
 void DijkstraAlgorithm(int source, int v, vector<int> &visited, vector<int> &distance)
 {
-    //Setting distance of source vertex as 0.
+    //Setting distance of source-vertex as 0.
     distance[source] = 0;
 
     for (int i = 1; i <= v; i++)
@@ -61,10 +53,8 @@ int main()
 
     // Initializing the graph matrix with 0.
     for (i = 1; i <= v; i++)
-    {
         for (j = 1; j <= v; j++)
             graph[i][j] = 0;
-    }
 
     // Creating Graph
     for (i = 1; i <= v; i++)
@@ -85,7 +75,21 @@ int main()
     vector<int> visited(v + 1, 0);
     vector<int> distance(v + 1, 9999);
 
-    DijkstraAlgorithm(1, v, visited, distance);
+    int source = 1;
+    DijkstraAlgorithm(source, v, visited, distance);
 
     return 0;
 }
+
+/*
+int minimumEdge(vector<int> &visited, vector<int> &distance, int v)
+{
+    int minVertex = -1; //initially we are assuming that first index in minimum index
+    for (int i = 1; i <= v; i++)
+    {
+        if ((!visited[i]) && (minVertex == -1 || distance[minVertex] > distance[i]))
+            minVertex = i;
+    }
+    return minVertex;
+
+}*/
