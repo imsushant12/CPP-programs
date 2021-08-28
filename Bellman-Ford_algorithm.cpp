@@ -15,13 +15,9 @@ void BellmanFordAlgorithm(int source, int v, vector<int> &distance)
     distance[source] = 0;
 
     for (int i = 1; i < v; i++)
-    {
         for (int j = 1; j <= v; j++)
-        {
             if (graph[i][j] != 0)
                 distance[j] = min(distance[j], distance[i] + graph[i][j]);
-        }
-    }
 
     for (int i = 1; i <= v; i++)
         cout << "\nDistance of " << source << " to " << i << " is : " << distance[i];
@@ -63,5 +59,5 @@ int main()
 
 /*
 if (graph[minEdge][j] != 0 && !visited[j])
-                distance[j] = min(distance[j], distance[minEdge] + graph[minEdge][j]);
-                */
+    distance[j] = min(distance[j], distance[minEdge] + graph[minEdge][j]);
+*/
