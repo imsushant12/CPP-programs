@@ -20,6 +20,7 @@ public:
 
     void printStack(stack<int> &s, int source, vector<int> &inStack)
     {
+        cout << "Strongly connected components are : ";
         while (s.top() != source)
         {
             cout << s.top() << "  ";
@@ -31,30 +32,30 @@ public:
         s.pop();
     }
 
-    void Tarjans_Algorithm(int source, vector<int> &discover, vector<int> &low, stack<int> &s, vector<int> &inStack)
+    void Tarjans_Algorithm(int source, vector<int> &discovery, vector<int> &low, stack<int> &s, vector<int> &inStack)
     {
         static int time = 0;
 
-        discover[source] = low[source] = ++time;
+        discovery[source] = low[source] = ++time;
         s.push(source);
         inStack[source] = 1;
 
         for (auto v : graph[source])
         {
-            if (discover[v] == -1)
+            if (discovery[v] == -1)
             {
-                Tarjans_Algorithm(v, discover, low, s, inStack);
+                Tarjans_Algorithm(v, discovery, low, s, inStack);
                 // Important STEP
                 low[source] = min(low[source], low[v]);
             }
             else if (inStack[v] == 1)
             {
                 // Important STEP
-                low[source] = min(low[source], discover[v]);
+                low[source] = min(low[source], discovery[v]);
             }
         }
         // Lastly printing the stack to get one component.
-        if (discover[source] == low[source])
+        if (discovery[source] == low[source])
             printStack(s, source, inStack);
     }
 };
@@ -69,19 +70,18 @@ int main()
     g.addEdge(0, 3);
     g.addEdge(3, 4);
 
-    vector<int> discover(V, -1);
+    vector<int> discovery(V, -1);
     vector<int> low(V, -1);
     // Stack to print the vertices of one component.
     stack<int> s;
     // Vector to store the vertices present in the stack.
     vector<int> inStack(V, -1);
 
-    cout << "Strongly connected components are : ";
     for (int i = 0; i < V; i++)
     {
-        // To make sure that no vertex is left un-discovered.
-        if (discover[i] == -1)
-            g.Tarjans_Algorithm(i, discover, low, s, inStack);
+        // To make sure that no vertex is left un-discoveryed.
+        if (discovery[i] == -1)
+            g.Tarjans_Algorithm(i, discovery, low, s, inStack);
     }
 
     return 0;
