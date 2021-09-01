@@ -4,47 +4,55 @@ using namespace std;
 class Graph
 {
     int V;
-    vector<int> *graph;
+    list<int> *graph;
 
 public:
     Graph(int V)
     {
         this->V = V;
-        graph = new vector<int>[V];
+        graph = new list<int>[V];
     }
 
     void addEdge(int u, int v)
     {
         graph[u].push_back(v);
     }
-
-    // int index = 0;
-    void dfs(vector<vector<int>> &result, vector<int> &path, int s, int d)
+    
+    void dfs(vector<vector<int>> &result, vector<int> &path, vector<bool> &visited,int s, int d)
     {
         path.push_back(s);
+        visited[s] = true;
 
         if (s == d)
-        {
             result.push_back(path);
-            return;
-        }
         else
         {
-            vector<int>::iterator i;
-            for (i = graph[s].begin(); i != graph[s].end(); i++)
-            {
-                //cout << *i << endl;
-                dfs(result, path, *i, d);
-            }
+            for(auto i : graph[s])
+                if(!visited[i])
+                    dfs(result, path, visited, i, d);
         }
+        // Before popping the last element in the backtracking, make sure that 
+        // the element is marked unvisited , so that it can be used in other path.
+        visited[path.back()] = false;
         path.pop_back();
+    }
+
+    vector<vector<int>> dfsutil(int source, int dest)
+    {
+        vector<vector<int>> result;
+        vector<int> path;
+        vector<bool> visited(this->V, false);
+
+        dfs(result, path, visited, source, dest);
+
+        return result;
+
     }
 
     void printAllPaths(int s, int d)
     {
         vector<vector<int>> result;
-        vector<int> path;
-        dfs(result, path, s, d);
+        result = dfsutil(s, d);
 
         for (int i = 0; i < result.size(); i++)
         {
