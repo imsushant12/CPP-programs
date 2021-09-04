@@ -59,13 +59,16 @@ public:
 
 int main()
 {
-    int V = 5;
+    int V = 7;
     Graph g(V);
-    g.addEdge(1, 0);
-    g.addEdge(0, 2);
-    g.addEdge(2, 1);
-    g.addEdge(0, 3);
-    g.addEdge(3, 4);
+    g.addEdge(0, 1);
+    g.addEdge(1, 2);
+    g.addEdge(2, 0);
+    g.addEdge(1, 3);
+    g.addEdge(1, 4);
+    g.addEdge(1, 6);
+    g.addEdge(3, 5);
+    g.addEdge(4, 5);
 
     vector<int> discovery(V, -1);
     vector<int> low(V, -1);
