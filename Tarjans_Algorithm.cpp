@@ -62,13 +62,25 @@ public:
 
 int main()
 {
-    int V = 5;
+    int V = 11;
     Graph g(V);
-    g.addEdge(1, 0);
-    g.addEdge(0, 2);
-    g.addEdge(2, 1);
-    g.addEdge(0, 3);
-    g.addEdge(3, 4);
+    g.addEdge(0,1);
+    g.addEdge(0,3);
+    g.addEdge(1,2);
+    g.addEdge(1,4);
+    g.addEdge(2,0);
+    g.addEdge(2,6);
+    g.addEdge(3,2);
+    g.addEdge(4,5);
+    g.addEdge(4,6);
+    g.addEdge(5,6);
+    g.addEdge(5,7);
+    g.addEdge(5,8);
+    g.addEdge(5,9);
+    g.addEdge(6,4);
+    g.addEdge(7,9);
+    g.addEdge(8,9);
+    g.addEdge(9,8);
 
     vector<int> discovery(V, -1);
     vector<int> low(V, -1);
@@ -79,7 +91,7 @@ int main()
 
     for (int i = 0; i < V; i++)
     {
-        // To make sure that no vertex is left un-discoveryed.
+        // To make sure that no vertex is left un-discoveryed even the graph is undirected.
         if (discovery[i] == -1)
             g.Tarjans_Algorithm(i, discovery, low, s, inStack);
     }
