@@ -18,41 +18,26 @@ public:
         graph[u].push_back(v);
     }
 
-    void Tarjans_Algorithm(int source, vector<int> &discovery, vector<int> &low, stack<int> &s, vector<int> &inStack)
+    void Tarjans_Algorithm(int source, vector<int> &discovery, vector<int> &low, vector<int> &parent)
     {
         static int time = 0;
-
         discovery[source] = low[source] = ++time;
-        s.push(source);
-        inStack[source] = 1;
 
         for (auto v : graph[source])
         {
             if (discovery[v] == -1)
             {
-                Tarjans_Algorithm(v, discovery, low, s, inStack);
+                parent[v] = source;
+                Tarjans_Algorithm(v, discovery, low, parent);
                 low[source] = min(low[source], low[v]);
 
                 // checking the CRITICAL POINT during backtracking.
                 if (low[v] > discovery[source])
-                    cout <<"The Critical Section or Cut Bridge is : " << source << " to " << v << endl;
-            }
+                    cout << "The Critical Section or Cut Bridge is : " << source << " to " << v << endl;
 
-            // Changing the low value of vertices that are already presentin the stack.
-            else if (inStack[v] == 1)        
-                low[source] = min(low[source], discovery[v]);
-        }
-        
-        // popping the elemnts of SCC from stack and marking them unvisited.
-        if (discovery[source] == low[source])
-        {
-            while (s.top() != source)
-            {
-                inStack[s.top()] == -1;
-                s.pop();
+                else if (v != parent[source])
+                    low[source] = min(low[source], discovery[v]);
             }
-            inStack[s.top()] == -1;
-            s.pop();
         }
     }
 };
@@ -72,12 +57,9 @@ int main()
 
     vector<int> discovery(V, -1);
     vector<int> low(V, -1);
-    stack<int> s;
-    vector<int> inStack(V, -1);
+    vector<int> parent(V, -1);
 
-    for (int i = 0; i < V; i++)
-        if (discovery[i] == -1)
-            g.Tarjans_Algorithm(i, discovery, low, s, inStack);
+    g.Tarjans_Algorithm(0, discovery, low, parent);
 
     return 0;
 }
