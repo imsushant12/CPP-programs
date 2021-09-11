@@ -18,74 +18,87 @@ public:
         graph[u].push_back(v);
     }
 
-    void printStack(stack<int> &s, int source, vector<int> &inStack)
+    void dfs_stack(int source, stack<int> &s, vector<int> &visited)
     {
-        while (s.top() != source)
-        {
-            cout << s.top() << "  ";
-            inStack[s.top()] == -1;
-            s.pop();
-        }
-        cout << s.top() << "  " << endl;
-        inStack[s.top()] == -1;
-        s.pop();
-    }
-
-    void Tarjans_Algorithm(int source, vector<int> &discover, vector<int> &low, stack<int> &s, vector<int> &inStack)
-    {
-        static int time = 0;
-
-        discover[source] = low[source] = ++time;
-        s.push(source);
-        inStack[source] = 1;
+        visited[source] = 1;
 
         for (auto v : graph[source])
         {
-            if (discover[v] == -1)
+            if (!visited[v])
+                dfs_stack(v, s, visited);
+        }
+
+        s.push(source);
+    }
+
+    Graph transpose()
+    {
+        Graph g(V);
+
+        for (int i = 0; i < V; i++)
+            for (auto v : g.graph[i])
+                g.addEdge(v,i);
+
+        return g;
+    }
+
+    void dfs(int source, vector<int> &visited)
+    {
+        visited[source] = 1;
+        cout << source << "  ";
+        for (auto v : graph[source])
+        {
+            if (!visited[v])
+                dfs(v, visited);
+        }
+    }
+
+    void Kosarajus_Algorithm(int source)
+    {
+        stack<int> s;
+        vector<int> visited(0, V);
+
+        // Using DFS to store vertices in a stack.
+        for (int i = 0; i < V; i++)
+        {
+            if (!visited[i])
+                dfs_stack(i, s, visited);
+        }
+
+        // Transposing or revesring edges of the graph.
+        Graph tg = transpose();
+
+        // Again initializing visited vector with 0 for further use.
+        for (int i = 0; i < V; i++)
+            visited[i] = 0;
+
+        while (!s.empty())
+        {
+            int current = s.top();
+            s.pop();
+
+            if (!visited[current])
             {
-                Tarjans_Algorithm(v, discover, low, s, inStack);
-                // Important STEP
-                low[source] = min(low[source], low[v]);
-            }
-            else if (inStack[v] == 1)
-            {
-                // Important STEP
-                low[source] = min(low[source], discover[v]);
+                cout << "\nStrongly connected component : ";
+                tg.dfs(current, visited);
             }
         }
-        // Lastly printing the stack to get one component.
-        if (discover[source] == low[source])
-            printStack(s, source, inStack);
     }
 };
 
 int main()
 {
-    int V = 7;
+    int V = 5;
     Graph g(V);
-    g.addEdge(0, 1);
-    g.addEdge(1, 2);
-    g.addEdge(2, 0);
-    g.addEdge(1, 3);
-    g.addEdge(1, 4);
-    g.addEdge(1, 6);
-    g.addEdge(3, 5);
-    g.addEdge(4, 5);
+    g.addEdge(1, 0);
+    g.addEdge(0, 2);
+    g.addEdge(2, 1);
+    g.addEdge(0, 3);
+    g.addEdge(3, 4);
 
-    vector<int> discover(V, -1);
-    vector<int> low(V, -1);
-    // Stack to print the vertices of one component.
-    stack<int> s;
-    // Vector to store the vertices present in the stack.
-    vector<int> inStack(V, -1);
+    int source = 0;
 
-    cout << "Strongly connected components are : \n";
-    for (int i = 0; i < V; i++)
-    {
-        // To make sure that no vertex is left un-discovered.
-        if (discover[i] == -1)
-            g.Tarjans_Algorithm(i, discover, low, s, inStack);
-    }
+    g.Kosarajus_Algorithm(source);
 
     return 0;
 }
