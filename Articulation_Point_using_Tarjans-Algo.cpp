@@ -66,9 +66,7 @@ int main()
     vector<int> ap(V, -1);
     vector<int> parent(V, -1);
 
-    for (int i = 0; i < V; i++)
-        if (discovery[i] == -1)
-            g.Articulation_Point(i, discovery, low, ap, parent);
+    g.Articulation_Point(0, discovery, low, ap, parent);
 
     cout << "Ariculation Points : ";
     for (int i = 0; i < V; i++)
