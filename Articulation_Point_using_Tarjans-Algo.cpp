@@ -16,6 +16,7 @@ public:
     void addEdge(int u, int v)
     {
         graph[u].push_back(v);
+        graph[v].push_back(u);
     }
 
     void Articulation_Point(int source, vector<int> &discovery, vector<int> &low, vector<int> &ap, vector<int> &parent)
