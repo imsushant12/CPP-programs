@@ -37,7 +37,7 @@ public:
 
         for (int i = 0; i < V; i++)
             for (auto v : g.graph[i])
-                g.addEdge(v,i);
+                g.addEdge(v, i);
 
         return g;
     }
@@ -56,7 +56,7 @@ public:
     void Kosarajus_Algorithm(int source)
     {
         stack<int> s;
-        vector<int> visited(0, V);
+        vector<int> visited(V, 0);
 
         // Using DFS to store vertices in a stack.
         for (int i = 0; i < V; i++)
