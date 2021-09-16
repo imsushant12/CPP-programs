@@ -5,20 +5,19 @@ class Graph
 {
 private:
     int v;
-    list<int> *l;
+    list<int> *graph;
 
 public:
-    list<int>::iterator it;
     Graph(int v)
     {
         this->v = v;
-        l = new list<int>[v];
+        graph = new list<int>[v];
     }
 
     void addEdges(int e1, int e2)
     {
-        l[e1].push_back(e2);
-        l[e2].push_back(e1);
+        graph[e1].push_back(e2);
+        graph[e2].push_back(e1);
     }
 
     void display(int v)
@@ -28,8 +27,8 @@ public:
         {
             cout << i << " --> ";
 
-            for (it = l[i].begin(); it != l[i].end(); it++)
-                cout << *it << " ";
+            for (auto v : graph[i])
+                cout << i << "  ";
             cout << endl;
         }
     }
@@ -38,11 +37,10 @@ public:
     {
         visited[source] = 1;
         cout << source << "  ";
-        list<int>::iterator it;
 
-        for (it = l[source].begin(); it != l[source].end(); it++)
-            if (!visited[*it])
-                DFS(*it, visited);
+        for (auto i : graph[source])
+            if (!visited[i])
+                DFS(i, visited);
     }
 };
 
