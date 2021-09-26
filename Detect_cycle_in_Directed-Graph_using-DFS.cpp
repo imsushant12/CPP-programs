@@ -6,8 +6,7 @@ class Graph
 private:
     int v;
     list<int> *graph;
-
-public:
+   public:
     Graph(int v)
     {
         this->v = v;
