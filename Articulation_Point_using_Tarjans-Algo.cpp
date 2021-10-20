@@ -37,7 +37,7 @@ public:
 
                 low[source] = min(low[source], low[v]);
 
-                // checking the CRITICAL POINT during backtracking.
+                // checking the CRITICAL or ARTICULATION POINT during backtracking.
                 if (parent[source] != -1 && low[v] >= discovery[source])
                     ap[source] = 1;
             }
