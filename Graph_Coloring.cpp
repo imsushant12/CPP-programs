@@ -68,7 +68,6 @@ public:
             chromaticNumber = max(chromaticNumber, colorAvailabe + 1);
 
             // finally reseting the availabe array after current vertex's iteration.
-
             for (auto x : graph[i])
             {
                 if (color[x] != -1)
