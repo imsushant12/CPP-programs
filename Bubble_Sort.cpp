@@ -22,11 +22,11 @@ void bubbleSort(int a[], int n)
         if (isSwapped == false)
             break;
     }
-
+    
+    // Printing the sorted array.
     for (int i = 0; i < n; i++)
-    {
         cout << a[i] << "  ";
-    }
+    
 }
 
 int main()
