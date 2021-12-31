@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-unordered_map <int, int> um;
+unordered_map<int, int> um;
 
 struct Node
 {
@@ -9,7 +9,7 @@ struct Node
     struct Node *left, *right;
 };
 
-struct Node* create()
+struct Node *create()
 {
     int data;
     Node *tree;
@@ -17,7 +17,7 @@ struct Node* create()
     cout << "\nEnter data to be inserted or type -1 : ";
     cin >> data;
 
-    if(data == -1)
+    if (data == -1)
         return 0;
 
     tree->info = data;
@@ -33,16 +33,16 @@ struct Node* create()
 
 void topView(Node *root, int level)
 {
-    if(root == NULL)
+    if (root == NULL)
         return;
 
     int i = um.count(level);
 
-    if(i == 0)
+    if (i == 0)
         um[level] = root->info;
 
-    topView(root->left, level-1);
-    topView(root->right, level+1);
+    topView(root->left, level - 1);
+    topView(root->right, level + 1);
 
     um[level] = root->info;
 
@@ -56,10 +56,8 @@ int main()
 
     topView(root, 0);
 
-    for(auto x : um)
-        cout<<x.first<<" --> "<<x.second<<endl;
+    for (auto x : um)
+        cout << x.first << " --> " << x.second << endl;
 
     return 0;
 }
-
-
